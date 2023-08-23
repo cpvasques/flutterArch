@@ -20,7 +20,7 @@ class RepositoryExampleImpl implements RepositoryExample {
             (p) => ModelExample.fromMap(p),
           )
           .toList();
-    } on DioError catch (e, s) {
+    } on DioException catch (e, s) {
       log('Erro ao buscar items', error: e, stackTrace: s);
       throw RepositoryException(message: 'Erro ao buscar items');
     }

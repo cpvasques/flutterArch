@@ -1,32 +1,50 @@
+import 'package:app_flutter_arch/app/core/ui/styles/colors_app.dart';
+import 'package:another_flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
-import 'package:top_snackbar_flutter/custom_snack_bar.dart';
-import 'package:top_snackbar_flutter/top_snack_bar.dart';
 
 mixin Messages<T extends StatefulWidget> on State<T> {
   void showError(String message) {
-    showTopSnackBar(
-      Overlay.of(context),
-      CustomSnackBar.error(
-        message: message,
+    Flushbar(
+      backgroundColor: ColorsApp.instance.red,
+      borderRadius: BorderRadius.circular(8),
+      duration: const Duration(seconds: 3),
+      flushbarStyle: FlushbarStyle.FLOATING,
+      icon: Icon(
+        Icons.error,
+        color: ColorsApp.instance.white,
       ),
-    );
+      margin: const EdgeInsets.all(8),
+      message: message,
+    ).show(context);
   }
 
   void showInfo(String message) {
-    showTopSnackBar(
-      Overlay.of(context),
-      CustomSnackBar.info(
-        message: message,
+    Flushbar(
+      backgroundColor: ColorsApp.instance.orange,
+      borderRadius: BorderRadius.circular(8),
+      duration: const Duration(seconds: 3),
+      flushbarStyle: FlushbarStyle.FLOATING,
+      icon: Icon(
+        Icons.warning,
+        color: ColorsApp.instance.white,
       ),
-    );
+      margin: const EdgeInsets.all(8),
+      message: message,
+    ).show(context);
   }
 
   void showSuccess(String message) {
-    showTopSnackBar(
-      Overlay.of(context),
-      CustomSnackBar.success(
-        message: message,
+    Flushbar(
+      backgroundColor: ColorsApp.instance.green,
+      borderRadius: BorderRadius.circular(8),
+      duration: const Duration(seconds: 3),
+      flushbarStyle: FlushbarStyle.FLOATING,
+      icon: Icon(
+        Icons.done,
+        color: ColorsApp.instance.white,
       ),
-    );
+      margin: const EdgeInsets.all(8),
+      message: message,
+    ).show(context);
   }
 }

@@ -1,6 +1,4 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'dart:developer';
-
+import 'package:app_flutter_arch/app/core/exceptions/repository_exception.dart';
 import 'package:bloc/bloc.dart';
 
 import 'package:app_flutter_arch/app/pages/home/home_state.dart';
@@ -17,13 +15,15 @@ class HomeController extends Cubit<HomeState> {
     emit(state.copyWith(status: HomeStateStatus.loading));
     try {
       final products = await _repositoryExample.findAllItems();
+
       emit(state.copyWith(status: HomeStateStatus.loaded, products: products));
-    } on Exception catch (e, s) {
-      log('Erro ao buscar items', error: e, stackTrace: s);
+    } on RepositoryException catch (e) {
+      final errorMessage = e.message;
+
       emit(
         state.copyWith(
           status: HomeStateStatus.error,
-          errorMessage: 'Erro ao buscar items',
+          errorMessage: errorMessage,
         ),
       );
     }

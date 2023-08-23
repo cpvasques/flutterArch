@@ -5,5 +5,5 @@ import 'package:app_flutter_arch/app/app_flutter_arch.dart';
 Future<void> main() async {
   await Env.instance.load();
 
-  runApp(const AppFlutterArch());
+  runApp(AppFlutterArch());
 }
