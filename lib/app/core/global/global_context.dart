@@ -1,8 +1,8 @@
+import 'package:app_flutter_arch/app/core/router/app_router.dart';
 import 'package:app_flutter_arch/app/core/ui/helpers/shared_preferences.dart';
-import 'package:flutter/material.dart';
 
 class GlobalContext {
-  late final GlobalKey<NavigatorState> _navigatorkey;
+  late final AppRouter _appRouter;
 
   static GlobalContext? _instance;
 
@@ -13,10 +13,10 @@ class GlobalContext {
     return _instance!;
   }
 
-  set navigatorKey(GlobalKey<NavigatorState> key) => _navigatorkey = key;
+  set appRouter(AppRouter appRouter) => _appRouter = appRouter;
 
   Future<void> unauthUser() async {
     await clearAllSharedPreferencesKeys();
-    _navigatorkey.currentState!.pushNamedAndRemoveUntil('/', (route) => false);
+    _appRouter.pushNamedAndRemoveUntil('/', (route) => false);
   }
 }
