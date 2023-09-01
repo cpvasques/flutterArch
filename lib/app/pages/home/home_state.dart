@@ -10,7 +10,13 @@ part 'home_state.g.dart';
 // flutter pub run build_runner watch -d
 
 @match
-enum HomeStateStatus { initial, loading, loaded, error }
+enum HomeStateStatus {
+  initial,
+  loading,
+  loaded,
+  error,
+  noError,
+}
 
 class HomeState extends Equatable {
   final HomeStateStatus status;
