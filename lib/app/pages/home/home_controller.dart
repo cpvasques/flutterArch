@@ -28,4 +28,19 @@ class HomeController extends Cubit<HomeState> {
       );
     }
   }
+
+  Future<void> login({
+    required String? user,
+    required String? password,
+  }) async {
+    if (user?.isNotEmpty != true && password?.isNotEmpty != true) {
+      emit(state.copyWith(
+        status: HomeStateStatus.error,
+        errorMessage: "Preencha todos os campos.",
+      ));
+      emit(state.copyWith(
+        status: HomeStateStatus.noError,
+      ));
+    }
+  }
 }
