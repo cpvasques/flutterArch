@@ -1,5 +1,10 @@
 # App Example
 
+## Arquitetado por:
+
+[@cpvasques](https://github.com/cpvasques)
+[@luisfelipeas5](https://github.com/luisfelipeas5)
+
 ## 🛠️ Tech Stacks
 
 - [Dart](https://dart.dev/)
