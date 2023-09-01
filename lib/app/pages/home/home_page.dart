@@ -31,7 +31,7 @@ class _HomePageState extends BasePage<HomePage, HomeController> {
             loading: () => showLoader(),
             error: () {
               hideLoader();
-              showError(state.errorMessage ?? 'Erro não informado');
+              showFailureError(state.failure);
             },
           );
         },
