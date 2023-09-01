@@ -1,4 +1,6 @@
-import 'package:equatable/equatable.dart';
+import 'package:app_flutter_arch/app/core/controller/base/base_controller_state.dart';
+import 'package:app_flutter_arch/app/core/controller/base/base_state_error.dart';
+import 'package:app_flutter_arch/app/core/result/failure.dart';
 import 'package:match/match.dart';
 
 import 'package:app_flutter_arch/app/dto/dto_example.dart';
@@ -18,28 +20,35 @@ enum HomeStateStatus {
   noError,
 }
 
-class HomeState extends Equatable {
+class HomeState extends BaseControllerState<HomeState> {
   final HomeStateStatus status;
   final List<ModelExample> itemExample;
-  final String? errorMessage;
   final List<ExampleDto> listSavedOnStoreExample;
 
   const HomeState({
     required this.status,
     required this.itemExample,
     required this.listSavedOnStoreExample,
-    this.errorMessage,
+    super.stateError = BaseStateError.none,
+    super.failure,
   });
 
-  const HomeState.initial()
-      : status = HomeStateStatus.initial,
-        itemExample = const [],
-        listSavedOnStoreExample = const [],
-        errorMessage = null;
+  factory HomeState.initial() {
+    return const HomeState(
+      status: HomeStateStatus.initial,
+      itemExample: [],
+      listSavedOnStoreExample: [],
+    );
+  }
 
   @override
   List<Object?> get props =>
-      [status, itemExample, errorMessage, listSavedOnStoreExample];
+      [
+        super.props,
+        status,
+        itemExample,
+        listSavedOnStoreExample,
+      ];
 
   HomeState copyWith({
     HomeStateStatus? status,
@@ -49,10 +58,25 @@ class HomeState extends Equatable {
   }) {
     return HomeState(
       status: status ?? this.status,
-      itemExample: products ?? this.itemExample,
-      errorMessage: errorMessage ?? this.errorMessage,
+      itemExample: products ?? itemExample,
       listSavedOnStoreExample:
           listSavedOnStoreExample ?? this.listSavedOnStoreExample,
+      failure: failure,
+      stateError: stateError,
+    );
+  }
+
+  @override
+  HomeState copyWithError({
+    BaseStateError? stateError,
+    Failure? failure,
+  }) {
+    return HomeState(
+      status: HomeStateStatus.error,
+      itemExample: itemExample,
+      listSavedOnStoreExample: listSavedOnStoreExample,
+      failure: failure ?? this.failure,
+      stateError: stateError ?? this.stateError,
     );
   }
 }
