@@ -2,9 +2,10 @@ import 'dart:developer';
 
 import 'package:app_flutter_arch/app/data_sources/remote_data_source/remote_data_source.dart';
 import 'package:app_flutter_arch/app/models/model_example.dart';
-
-import '../../core/exceptions/repository_exception.dart';
-import './repository_example.dart';
+import 'package:app_flutter_arch/app/core/result/failure.dart';
+import 'package:app_flutter_arch/app/core/result/result.dart';
+import 'package:app_flutter_arch/app/repositories/repositoryExample/repository_example.dart';
+import 'package:dio/dio.dart';
 
 class RepositoryExampleImpl implements RepositoryExample {
   final RemoteDataSource remoteDataSource;
@@ -14,13 +15,23 @@ class RepositoryExampleImpl implements RepositoryExample {
   });
 
   @override
-  Future<List<ModelExample>> findAllItems() async {
+  Future<Result<List<ModelExample>>> findAllItems() async {
     try {
-      //TODO: check if network is available. If not, get from localRemoteDataSource
-      return await remoteDataSource.findAllItems();
+      final modelExamples = await remoteDataSource.findAllItems();
+      return Result.success(data: modelExamples);
+    } on DioException catch (e, s) {
+      log('Erro de API ao buscar items', error: e, stackTrace: s);
+      return Result.fail(
+        failure: RemoteFailure(message: 'Erro ao buscar items'),
+      );
     } catch (e, s) {
-      log('Erro ao buscar items', error: e, stackTrace: s);
-      throw RepositoryException(message: 'Erro ao buscar items');
+      log('Erro desconhecido ao buscar items', error: e, stackTrace: s);
+      return Result.fail(
+        failure: RemoteFailure(message: 'Erro ao buscar items'),
+      );
     }
+    //TODO esse try catch vai se repetir em muitos repositories. Acho que vale
+    //criar um BaseRepository que faça um mapeamento default que possa ser
+    //sobresscrito eventualmente.
   }
 }
