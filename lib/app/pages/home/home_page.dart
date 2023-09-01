@@ -19,8 +19,8 @@ class _HomePageState extends BaseState<HomePage, HomeController> {
   final _loginFormKey = GlobalKey<FormState>();
   final TextEditingController userController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
-  late FocusNode userFocusNode;
-  late FocusNode passwordFocusNode;
+  late FocusNode userFocusNode = FocusNode();
+  late FocusNode passwordFocusNode = FocusNode();
 
   //se onReady não funcionar, utilize:
   // @override
@@ -33,8 +33,6 @@ class _HomePageState extends BaseState<HomePage, HomeController> {
   @override
   void onReady() {
     controller.loadItems();
-    userFocusNode = FocusNode();
-    passwordFocusNode = FocusNode();
   }
 
   @override
