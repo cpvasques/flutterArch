@@ -15,7 +15,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends BasePage<HomePage, HomeController> {
-
   @override
   void onReady() {
     controller.loadItems();

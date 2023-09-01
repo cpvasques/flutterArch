@@ -1,6 +1,6 @@
+import 'package:app_flutter_arch/app/core/router/app_router_extensions.dart';
 import 'package:app_flutter_arch/app/core/ui/helpers/size_extensions.dart';
 import 'package:app_flutter_arch/app/core/ui/widgets/button_example.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter/material.dart';
 
 class SplashPage extends StatelessWidget {
@@ -45,7 +45,7 @@ class SplashPage extends StatelessWidget {
                     height: 35,
                     label: 'Ir para home',
                     onPressed: () {
-                      Navigator.of(context).popAndPushNamed('/home');
+                      context.popAndPushNamed('/home');
                     },
                   )
                 ],
