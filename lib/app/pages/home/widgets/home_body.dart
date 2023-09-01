@@ -1,6 +1,7 @@
 import 'package:app_flutter_arch/app/core/ui/base_state/base_state.dart';
 import 'package:app_flutter_arch/app/core/ui/base_state/state_with_controller.dart';
 import 'package:app_flutter_arch/app/core/ui/helpers/size_extensions.dart';
+import 'package:app_flutter_arch/app/core/ui/widgets/button_example.dart';
 import 'package:app_flutter_arch/app/core/ui/widgets/generic_input.dart';
 import 'package:app_flutter_arch/app/pages/home/home_controller.dart';
 import 'package:flutter/material.dart';
@@ -54,6 +55,11 @@ class _HomeBodyState extends BaseState<HomeBody>
                 controller: _passwordController,
                 focusNode: _passwordFocusNode,
                 onFieldSubmitted: (term) => _onLoginButtonPressed(),
+              ),
+              ButtonExample(
+                width: context.percentWidth(.9),
+                label: 'Login',
+                onPressed: _onLoginButtonPressed,
               ),
             ],
           ),
